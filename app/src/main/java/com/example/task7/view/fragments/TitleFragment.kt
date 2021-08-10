@@ -48,7 +48,6 @@ class TitleFragment : Fragment() {
             (requireActivity() as MainActivity).navController.navigate(R.id.action_titleFragment_to_noteContentFragment)
         }
 
-        //как сделать лучше?
         adapter = NoteRecyclerAdapter(requireContext()) { note ->
             openNote(note)
         }
@@ -63,18 +62,11 @@ class TitleFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-//                newText?.let {
-//                    if (it.isEmpty()) {
-//                        val allD
-//                    }
-//                }
-
                 newText?.run {
                     viewModel.filterBySearch(this).observe(viewLifecycleOwner, {
                         adapter.setData(it)
                     })
                 }
-
                 return false
             }
         })
